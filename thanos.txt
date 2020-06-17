@@ -1,0 +1,19 @@
+thanos
+https://github.kdata.vn/quyvn/thanos-prometheus/blob/master/Ref.md
+
+Open distro
+
+https://opendistro.github.io/for-elasticsearch/downloads.html
+https://opendistro.github.io/for-elasticsearch-docs/docs/install/rpm/
+
+https://elk-docker.readthedocs.io/#installation
+
+https://logz.io/blog/open-distro-for-elasticsearch/
+https://opendistro.github.io/for-elasticsearch-docs/docs/elasticsearch/
+
+
+curl -X GET "localhost:9200/?pretty"
+
+https://www.elastic.co/guide/en/elasticsearch/reference/6.7/rpm.html
+
+https://github.com/opendistro-for-elasticsearch/security

@@ -1,0 +1,7 @@
+type: AZURE
+config:
+  storage_account: "quyvn"
+  storage_account_key: "LVJc8xYitm+8eWgvbCbdJEUWZcYpxxhVUpuF5RbvTH5FzeWeWvVlL3vwlYl0S6nqtWoUztnLmFf/+WbFIS7UjA=="
+  container: "quyvn-container"
+  endpoint: "blob.core.windows.net"
+  max_retries: 0

@@ -1,0 +1,40 @@
+# alertmanager.yml
+global:
+  resolve_timeout: 1d
+route:
+  group_by: ['alertnameww', 'cluster', 'service']
+  # When a new group of alerts is created by an incoming alert, wait at
+  # least 'group_wait' to send the initial notification.
+  # This way ensures that you get multiple alerts for the same group that start
+  # firing shortly after another are batched together on the first
+  # notification.
+  group_wait: 30s
+
+  # When the first notification was sent, wait 'group_interval' to send a betch
+  # of new alerts that started firing for that group.
+  group_interval: 1m
+
+  # If an alert has successfully been sent, wait 'repeat_interval' to
+  # resend them.
+  repeat_interval: 12h
+
+  # A default receiver
+  receiver: "channel1"
+
+  # All the above attributes are inherited by all child routes and can
+  # overwritten on each.
+  routes:
+    - receiver: "channel1"
+      group_wait: 30s
+      group_interval: 1m
+
+
+receivers:
+  - name: "channel1"
+    webhook_configs:
+      - send_resolved: true
+        url: http://localhost:8001/alert-webhook
+    slack_configs:
+      - send_resolved: true
+        api_url: https://hooks.slack.com/services/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
+        channel: '#monitoring'

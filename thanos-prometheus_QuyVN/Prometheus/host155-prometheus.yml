@@ -1,0 +1,21 @@
+
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+  external_labels: 
+    region: vn
+    monitor: lab
+    replica: mysql
+    instance: test_155
+scrape_configs:
+- job_name: mysql_exporter
+  honor_timestamps: true
+  metrics_path: /metrics
+  scheme: http 
+  static_configs:
+  - targets: ['192.168.10.121:9104']
+- job_name: 'prometheus'
+  scrape_interval: 5s
+  static_configs:
+  - targets: ['localhost:9090']

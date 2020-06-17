@@ -1,0 +1,20 @@
+Prometheus
+https://www.google.com/search?q=Prometheus+Operator&oq=Prometheus+Operator&aqs=chrome..69i57j0l7.1474j0j7&sourceid=chrome&ie=UTF-8
+
+https://github.com/coreos/prometheus-operator
+
+https://github.com/coreos/prometheus-operator/tree/master/example/storage
+
+Sticky, [22.10.19 20:27]
+Em chỉ có 4 con Prometheus với 1 con Federate thôi
+
+Sticky, [22.10.19 20:27]
+Chưa thấy cần tới operator
+
+
+helm install stable/prometheus
+
+
+https://github.com/helm/charts/blob/master/stable/airflow/templates/configmap-env.yaml
+
+https://sweetcode.io/a-first-look-at-the-helm-3-plan/

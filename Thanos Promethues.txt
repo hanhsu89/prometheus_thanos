@@ -1,0 +1,3 @@
+https://github.com/thanos-io/thanos
+
+https://www.google.com/search?q=thanos+prometheus&oq=thanos+pro&aqs=chrome.2.69i57j0l5.5406j0j7&sourceid=chrome&ie=UTF-8

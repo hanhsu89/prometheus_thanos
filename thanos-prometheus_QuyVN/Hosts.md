@@ -1,0 +1,21 @@
+1. Chạy thử 
+    - Host prometheus : 192.168.10.154:9090, 192.168.10.155:9090 
+        - command : docker run -p 9090:9090 --restart always -v /root/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:Z -v prome:/prometheus --name prometheus  prom/prometheus --storage.tsdb.min-block-duration 2h --storage.tsdb.max-block-duration 2h --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle
+    - Host Grafana : 192.168.10.154:3000
+    - Metrics : 
+        - 192.168.10.121:9100 : node_exporter
+        - 192.168.10.121:9104 : mysqld_expporter
+    - Sidecar : 
+        - Host : 192.168.10.154:19090
+            - command : ./thanos sidecar  --tsdb.path="/var/lib/docker/volumes/prome/_data" --prometheus.url http://localhost:9090   --http-address 0.0.0.0:19191 --grpc-address  0.0.0.0:19090 --objstore.config-file bucket.yaml 
+            - Docker :  docker run --restart always --network host --name thanos-sidecar -v /root/prometheus/thanos/bucket.yaml:/thanos/bucket.yaml:Z -v prome:/prometheus/ doctorwhoq/thanos  sidecar  --tsdb.path="/prometheus/data/" --prometheus.url http://localhost:9090   --http-address 0.0.0.0:19191 --grpc-address  0.0.0.0:19090 --objstore.config-file /thanos/bucket.yaml
+
+        - Host : 192.168.10.155:19090
+            - Command : ./thanos sidecar  --tsdb.path="/var/lib/docker/volumes/prome/_data" --prometheus.url http://localhost:9090   --http-address 0.0.0.0:19191 --grpc-address  0.0.0.0:19090 --objstore.config-file bucket.yaml 
+    - Querier : 
+        - Host: 192.168.10.156:9090
+            - command : ./thanos query --http-address 0.0.0.0:9090 --store 192.168.10.154:19090 --store 192.168.10.209:19090       
+            - docker run --restart always --network host --name thanos-query doctorwhoq/thanos query --http-address 0.0.0.0:9090 --store 192.168.10.154:19090 --store 192.168.10.155:19090
+    - Bucket check : 
+        - Host : 192.168.10.154:9090
+            - Docker : docker run --restart always --network host --name thanos-bucket -v /root/prometheus/thanos/bucket.yaml:/thanos/bucket.yaml:Z  doctorwhoq/thanos bucket web --objstore.config-file /thanos/bucket.yaml

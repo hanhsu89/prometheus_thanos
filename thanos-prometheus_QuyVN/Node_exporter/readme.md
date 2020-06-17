@@ -1,0 +1,10 @@
+- docker run --network host -d --restart always -v "/:/host:ro,rslave" --name node-exporter quay.io/prometheus/node-exporter --path.rootfs=/host --collector.diskstats \
+    --collector.filefd \
+    --collector.filesystem \
+    --collector.loadavg \
+    --collector.meminfo \
+    --collector.netdev \
+    --collector.stat \
+    --collector.time \
+    --collector.uname \
+    --collector.vmstat
